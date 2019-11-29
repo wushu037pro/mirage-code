@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文本阴影</title>
+		<style type="text/css">
+			h1{
+				text-shadow: 5px 5px 5px #FF0000;
+			}
+			.test{
+				width:11em; 
+				border:1px solid #000000;
+				word-wrap:break-word;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>文本阴影</h1>
+		<!--
+			语法
+text-shadow: h-shadow v-shadow blur color;
+注释：text-shadow 属性向文本添加一个或多个阴影。
+该属性是逗号分隔的阴影列表，每个阴影有两个或三个长度值和一个可选的颜色值进行规定。省略的长度是 0。
+
+值	                                            描述	
+h-shadow	必需。水平阴影的位置。允许负值。	
+v-shadow	必需。垂直阴影的位置。允许负值。	
+blur	       可选。模糊的距离。	
+color	       可选。阴影的颜色。	
+		-->
+		<hr />
+		<h1> CSS3自动换行</h1>
+		<p class="test">
+			This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. 
+			The long word will break and wrap to the next line.
+	   </p>
+	   
+	   <!--
+	   	
+	   	语法
+word-wrap: normal|break-word;
+值	                         描述
+normal	            只在允许的断字点换行（浏览器保持默认处理）。
+break-word	  在长单词或 URL 地址内部进行换行。
+	   -->
+	</body>
+</html>

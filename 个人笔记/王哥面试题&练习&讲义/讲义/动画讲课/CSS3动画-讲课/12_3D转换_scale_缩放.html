@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			  div{
+				width: 150px;
+				height: 150px;
+				background-color: yellow;
+				border: 1px solid red;
+				margin: 200px;
+			}
+			  /*
+			   scale3d(x,y,z)	定义 3D 缩放转换。	
+				scaleX(x)	通过设置 X 轴的值来定义缩放转换。	
+				scaleY(y)	通过设置 Y 轴的值来定义缩放转换。	
+				scaleZ(z)	通过设置 Z 轴的值来定义 3D 缩放转换。
+			   * */
+			  .div2{
+				-webkit-transform: scaleX(2);
+			}
+			.div3{
+				-webkit-transform: scaleY(2);
+			}
+			.div4{
+				-webkit-transform: scaleZ(2);
+			}
+			.div5{
+				-webkit-transform: scale3d(1,2,3);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div1">
+			我们来学习3D缩放方法
+		</div>
+		<div class="div2">
+			我们来学习3D X轴缩放方法
+		</div>
+		<div class="div3">
+			我们来学习3D Y轴缩放方法
+		</div>
+		<div class="div4">
+			我们来学习3D Z轴缩放方法
+		</div>
+		<div class="div5">
+			我们来学习3D轴缩放方法
+		</div>
+	</body>
+</html>

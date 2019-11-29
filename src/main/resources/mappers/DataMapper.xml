@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ 	<mapper namespace="ws.mirage.code.grs.exercise.mapper.DataMapper">
+ 	
+ 		<!-- 新增用户信息 -->
+ 		<insert id="addnewUser">
+ 		INSERT INTO grs_ex_user(
+ 			phone,		phone_home,	
+ 			phone_time,	username,
+ 			phone2,		is_secrecy,
+ 			home
+ 		)VALUES(
+ 			#{phone},		#{phoneHome},
+ 			#{phoneTime},	#{username},
+ 			#{phone2},		#{isSecrecy},
+ 			#{home}
+ 		)
+ 		</insert>
+ 		
+ 		<!-- 新增表单详情 -->
+ 		<insert id="addnewPp">
+ 		INSERT INTO grs_ex_pp(
+ 			form_Src,	nature,	
+ 			content,	title,	
+ 			area,		event,	
+ 			time,		branch,	
+ 			detail,		mode,
+ 			answer,		form_code,
+ 			uid
+ 		)VALUES(
+ 			#{formSrc},	#{nature},	
+ 			#{content},		#{title},
+ 			#{area},		#{event},
+ 			#{time},		#{branch},
+ 			#{detail},		#{mode},
+ 			#{answer},		#{formCode},
+ 			#{uid}
+ 		)
+ 		</insert>
+ 		
+ 		<!-- 查询表单编码基础值 -->
+ 		<select id="fcBasic"
+ 				resultType="ws.mirage.code.grs.exercise.entity.FCBasic">
+ 			SELECT
+ 				date_re AS dateRe,
+ 				code_re AS codeRe,
+ 				prefix
+ 			FROM
+ 				grs_ex_fcbasic
+ 			WHERE
+ 				fid=1
+ 		</select>
+ 	
+ 		<!-- 更新编码序号参考值 -->
+ 		<update id="upCodeRe">
+	 		UPDATE
+	 			grs_ex_fcbasic
+	 		SET
+	 			code_re=#{codeRe}
+	 		WHERE
+	 			fid=1
+ 		</update>
+ 		
+ 		<!-- 更新编码日期参考值 -->
+ 		<update id="upDateRe">
+ 			UPDATE
+	 			grs_ex_fcbasic
+	 		SET
+	 			date_re=#{dateRe}
+	 		WHERE
+	 			fid=1
+ 		</update>
+ 	
+ 		<!-- 获取下拉选基础表 -->
+ 		<select id="opBasic" resultType="ws.mirage.code.grs.exercise.entity.OpBasic">
+ 			SELECT
+ 				form_src AS formSrc,	nature
+ 			FROM
+ 				grs_ex_opbasic
+ 		</select>
+		
+		<!-- 获取uid -->
+ 		<select id="getUid" resultType="java.lang.Integer">
+ 			SELECT
+ 				max(uid)
+ 			FROM
+ 				grs_ex_user
+ 		</select>
+ 		
+ 		<!-- 查询少量关联数据，用于显示简略表 -->
+ 		<select id="miniTable" resultType="ws.mirage.code.grs.exercise.vo.PpVo">
+ 			SELECT
+ 				pid,
+ 				phone,		username,
+ 				phone_time phoneTime,
+ 				form_code formCode,	
+ 				form_src formSrc,
+ 				nature,		branch
+ 			FROM
+ 				grs_ex_pp p JOIN grs_ex_user u
+ 			ON
+ 				p.uid=u.uid
+ 		</select>
+ 		
+ 		<!-- 根据外键uid查询两个表的数据，进行详情查询 -->
+ 		<select id="selectPtl" resultType="ws.mirage.code.grs.exercise.vo.PpUserVo">
+ 			SELECT
+ 				form_code formCode,
+				form_src formSrc,
+				nature,		content,
+				title,		area,
+				event,		time,
+				branch,		detail,
+				mode,		answer,
+				
+				phone,		home,
+				phone_home phoneHome,
+				phone_time phoneTime,
+				username,		phone2,
+				is_secrecy isSecrecy
+ 			FROM
+ 				grs_ex_pp p JOIN grs_ex_user u
+ 			ON
+ 				p.uid=u.uid
+ 			WHERE
+ 				pid=#{pid}
+ 		</select>
+ 		
+ 		<!-- 进行来电信息表的修改，依据是user.phone -->
+ 		<update id="upUser">
+ 			UPDATE
+ 				grs_ex_user
+ 			SET
+ 				phone_home=#{phoneHome},	
+	 			phone_time=#{phoneTime},
+	 			username=#{username},
+	 			phone2=#{phone2},
+	 			is_secrecy=#{isSecrecy},
+	 			home=#{home}
+ 			WHERE
+ 				uid=#{uid}
+ 		</update>
+ 		
+ 		<!-- 进行表单详情表的修改，依据是pp.formCode -->
+ 		<update id="upPp">
+ 			UPDATE
+ 				grs_ex_pp
+ 			SET
+	 			form_Src=#{formSrc},
+	 			nature=#{nature},
+	 			content=#{content},	
+	 			title=#{title},	
+	 			area=#{area},
+				event=#{event},
+	 			time=#{time},
+	 			branch=#{branch},	
+	 			detail=#{detail},
+	 			mode=#{mode},
+	 			answer=#{answer}
+ 			WHERE
+ 				form_code=#{formCode}
+ 		</update>
+ 		
+ 		<!-- 根据表单编码查询外键uid -->
+ 		<select id="selectUid" resultType="java.lang.Integer">
+ 			SELECT
+ 				uid
+ 			FROM
+ 				grs_ex_pp
+ 			WHERE
+ 				form_code=#{formCode}
+ 		</select>
+ 		
+ 		<!-- 根据表单编码删除来电信息表的数据 -->
+ 		<delete id="deleteUser">
+ 			DELETE 
+ 			FROM
+ 				grs_ex_user
+ 			WHERE
+ 				uid=(
+ 					SELECT
+ 						uid
+ 					FROM
+ 						grs_ex_pp
+ 					WHERE
+ 						form_code=#{formCode}
+ 				)
+ 		</delete>
+ 		
+ 		<!-- 根据表单编码删除表单详情的数据 -->
+ 		<delete id="deletePp">
+ 			DELETE
+ 			FROM
+ 				grs_ex_pp
+ 			WHERE
+ 				form_code=#{formCode}
+ 		</delete>
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 	
+ 	
+ 	
+ 	</mapper>

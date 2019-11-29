@@ -1,0 +1,112 @@
+.loader{
+	background: #000;
+	background: radial-gradient(#222,#000);
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	/*固定定位*/
+	position: fixed;
+	right: 0;
+	top: 0;
+	/*border: 1px  solid  red;*/
+	/*堆叠顺序*/
+	z-index: 999999;
+}
+.loader-inner{
+	width: 100px;
+	height: 60px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	margin: auto;
+	position: absolute;/*脱离文档流布局*/
+	border: 1px solid red;
+}
+.loader-line-wrap{
+	     			/*cubic-bezier 属性规定过渡效果的速度曲线。*/
+	-webkit-animation: loader 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+    /*box-sizing 定义匹配某个区域的特定元素 可有可无*/
+    box-sizing: border-box;
+    height: 50px;
+    width: 100px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    -webkit-transform-origin: 50% 100%;
+    /*border: 1px solid red;*/
+}
+
+.loader-line{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	box-sizing: border-box;
+					    /*transparent 边框颜色为透明色*/
+	border: 4px solid transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.loader-line-wrap:nth-child(1) .loader-line{
+	width: 90px;
+	height: 90px;
+	top: 7px;
+	border-color: hsl(0,80%,60%);
+	/*取值：
+	H：
+	Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360
+	S：
+	Saturation(饱和度)。取值为：0.0% - 100.0%
+	L：
+	Lightness(亮度)。取值为：0.0% - 100.0%
+	  差值是14
+	* */
+	
+}
+
+.loader-line-wrap:nth-child(2) .loader-line{
+	width: 76px;
+	height: 76px;
+	top: 14px;
+	border-color: hsl(60,80%,60%);
+}
+.loader-line-wrap:nth-child(3) .loader-line{
+	width: 62px;
+	height: 62px;
+	top: 21px;
+	border-color: hsl(120,80%,60%);
+}
+.loader-line-wrap:nth-child(4) .loader-line{
+	width: 48px;
+	height: 48px;
+	top: 28px;
+	border-color: hsl(180,80%,60%);
+}
+.loader-line-wrap:nth-child(5) .loader-line{
+	width: 34px;
+	height: 34px;
+	top: 35px;
+	border-color: hsl(240,80%,60%);
+}
+.loader-line-wrap:nth-child(1){-webkit-animation-delay:-50ms ;}
+.loader-line-wrap:nth-child(2){-webkit-animation-delay:-100ms ;}
+.loader-line-wrap:nth-child(3){-webkit-animation-delay:-150ms ;}
+.loader-line-wrap:nth-child(4){-webkit-animation-delay:-200ms ;}
+.loader-line-wrap:nth-child(5){-webkit-animation-delay:-250ms ;}
+
+@-webkit-keyframes loader{
+	0%,15%{                 /*rotate 旋转*/
+		-webkit-transform: rotate(0);
+	}
+	100%{
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				margin: 50px;
+			}
+			#div1{
+				color: white;
+				border: 1px solid red; 
+                -webkit-animation: myFirst 5s;
+			}
+			@-webkit-keyframes myFirst{
+				0%   {background: red;}
+				25%  {background: yellow;}
+				50%  {background: blue;}
+				100% {background: green;}
+			}
+			
+			#div2{
+				color: white;
+				border: 1px solid red; 
+				position: relative;/*需要给定位*/
+                -webkit-animation: mySecond 5s;
+			}
+			@-webkit-keyframes mySecond{
+				0%   {background:red; left:0px; top:0px;}
+				25%  {background:yellow; left:200px; top:0px;}
+				50%  {background:blue; left:200px; top:200px;}
+				75%  {background:green; left:0px; top:200px;}
+				100% {background:red; left:0px; top:0px;}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			  颜色变换
+		</div>
+		<div id="div2">
+			改变颜色和位置
+		</div>
+		
+		<p>
+			什么是 CSS3 中的动画？<br />
+动画是使元素从一种样式逐渐变化为另一种样式的效果。<br />
+
+您可以改变任意多的样式任意多的次数。<br />
+
+请用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。<br />
+
+0% 是动画的开始，100% 是动画的完成。<br />
+
+为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。<br />
+		</p>
+	</body>
+</html>

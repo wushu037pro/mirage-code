@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+			}
+			.loader{
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				margin: auto;
+			}
+			.loader{
+				  /*em 
+				   *当前对行内文本的字体尺寸未被人为设置，
+				   *则相对于浏览器的默认字体尺寸。  */
+				width: 2.5em;
+				height: 2.5em;
+				transform: rotate(165deg);
+				border: 1px solid red;
+			}
+			.loader:before,.loader:after{
+				/*border: 1px solid blue;*/
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				display: block;
+				
+				width: 0.5em;
+				height: 0.5em;
+				border-radius: 0.25em;
+				 /*translate 转换*/
+				-webkit-transform: translate(-50%,-50%);
+			}
+			.loader:before{
+									/*infinite 无限轮回*/
+				-webkit-animation: before 4s infinite;
+			}
+			.loader:after{
+									/*infinite 无限轮回*/
+				-webkit-animation: after 4s infinite;
+			}
+			@-webkit-keyframes before{
+				0%{
+					width: 0.5em;
+					/*阴影*/
+					box-shadow: 1em -0.5em rgba(225,20,98,0.75),
+					 -1em 0.5em rgba(111,202,220,0.75);
+				}
+				35%{
+					width: 2.5em;
+					box-shadow: 0 -0.5em rgba(225,20,98,0.75),
+					  0 0.5em rgba(111,202,220,0.75);
+				}
+				70%{
+					width: 0.5em;
+					/*阴影*/
+					box-shadow: -1em -0.5em rgba(225,20,98,0.75),
+					 1em 0.5em rgba(111,202,220,0.75);
+				}
+				100%{
+					box-shadow: 1em -0.5em rgba(225,20,98,0.75),
+					  -1em 0.5em rgba(111,202,220,0.75);
+				}
+			}
+			@-webkit-keyframes after{
+				0%{
+					height: 0.5em;
+					box-shadow: 0.5em 1em rgba(61,184,143,0.75),
+					 -0.5em -1em rgba(233,169,32,0.75);
+				}
+				35%{
+					height: 2.5em;
+					box-shadow: 0.5em 0 rgba(61,184,143,0.75),
+					 -0.5em 0 rgba(233,169,32,0.75);
+				}
+				70%{
+					height: 0.5em;
+					box-shadow: 0.5em -1em rgba(61,184,143,0.75),
+					 -0.5em 1em rgba(233,169,32,0.75);
+				}
+				100%{
+					box-shadow: 0.5em 1em rgba(61,184,143,0.75),
+					 -0.5em -1em rgba(233,169,32,0.75);
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="loader">
+			
+		</div>
+	</body>
+</html>

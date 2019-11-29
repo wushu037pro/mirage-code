@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>简略表</title>
+<!-- 引入layui.css -->
+<link rel="stylesheet" href="${re.contextPath}/plugin/layui/css/layui.css" media="all">
+<!-- 引入layui.js -->
+<script src="${re.contextPath}/plugin/layui/layui.js"></script>
+<!-- 引入JQuery-用ajax -->
+<script src="${re.contextPath}/plugin/jquery/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+	#newKey{
+		position:relative;
+		top:5px;
+		left: 85%;
+	}
+</style>
+</head>
+<body>
+<!-- 创建新工单按钮 -->
+<a id="newKey" href="/exercise/clickNew" class="layui-btn layui-btn-radius layui-btn-normal">创建新工单</a>
+<!-- layui数据表格 -->
+<table id="miniTable" lay-filter="name1"></table>
+<!-- 简略表按钮 -->
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">查看详情</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!-- layui在表中添加数据和事件 -->
+<script>
+layui.use('table', function(){
+	var table = layui.table;
+	//执行一个 table 实例
+	table.render({
+		elem: '#miniTable',
+		height: 465,
+		url: '/exercise/showAll/miniTable',    //数据接口
+		page: true,    //开启分页
+		cols: [[    //表头
+    		//怎么让这些title居中呢，分别加text-align样式吗
+			{field: 'pid', title: 'id', width:50, sort: true},
+			{field: 'phone', title: '来电号码', width:120, sort: true},
+			{field: 'username', title: '姓名', width:90},
+			{field: 'phoneTime', title: '来电时间', width: 160, sort: true},
+			{field: 'formCode', title: '表单编码', width:180, sort: true},
+			{field: 'formSrc', title: '表单来源', width: 120},
+			{field: 'nature', title: '性质分类', width:90},
+			{field: 'branch', title: '线路', width: 120},
+			{fixed: 'right', title:'操作',width:150,toolbar: '#barDemo'}
+		]]
+	});
+	
+	//监听操作按钮事件
+	table.on('tool(name1)', function(obj){ //注：tool是工具条事件名，name1是table原始容器的属性 lay-filter="对应的值"
+	  var data = obj.data; //获得当前行数据
+	  var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+	  var tr = obj.tr; //获得当前行 tr 的DOM对象
+		
+	  if(layEvent === 'edit'){ //查看详情
+	    window.location.href="particulars?pid="+data.pid;
+	  } else if(layEvent === 'del'){ //删除
+		//layer.alert(data.formCode);//利用当前行数据获取当前行数据的pid
+	    layer.confirm('真的删除行么', function(index){
+	    	obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+	    	layer.close(index);
+	    	//向服务端发送删除指令
+			$.ajax({
+				"url":"/exercise/delete",
+				"data":"formCode="+data.formCode,//键值对形式
+				"type":"POST",
+				"dataType":"json",
+				"success":function(json) {
+					if (json.state == 1) {
+						console.log("删除成功");//没返回任何数据
+					}
+				}	
+			});
+	    });
+	  }
+
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>详情页</title>
+<!-- 引入JQuery-用ajax -->
+<script src="${re.contextPath}/plugin/jquery/jquery-3.2.1.min.js"></script>
+<!-- 引入layui.css -->
+<link rel="stylesheet" href="${re.contextPath}/plugin/layui/css/layui.css" media="all">
+<!-- 引入layui.js -->
+<script src="${re.contextPath}/plugin/layui/layui.js"></script>
+
+<style type="text/css">
+	.ali{
+		text-align:right;
+	}
+	.alig{
+		margin-left: 0%;
+	}
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		//手机号码和联系电话同步显示
+		var one = document.getElementById("one");
+		var two = document.getElementById("two");
+		one.onkeyup=function(){
+			two.value=this.value;
+		}
+		//复选框的点击事件
+		var branch0 = document.getElementById("branch0");
+		var items = document.getElementsByName("branchPage");
+		branch0.onclick=function(){
+			//将所有线路取消选择
+			for(var i=0;i<items.length-1;i++){
+				items[i].checked = false;
+			}
+			//不能让一个都不选,只要点击即为勾选，不能取消勾选
+				branch0.checked = true;
+		}
+		for(var i=0;i<items.length-1;i++){
+			items[i].onclick = function(){
+				branch0.checked = false;
+			}
+		}
+		//返回按钮点击事件
+		var back = document.getElementById("back");
+		back.onclick=function(){
+			//返回简略表
+			window.location.href="showAll";
+		}
+		
+		//读取并设置下拉选,一共四个下拉选，[1]是表单来源，[2]是性质分类
+		var select = document.getElementsByTagName('select');
+		//设置-表单来源
+		var options1 = select[1].getElementsByTagName('option');
+		for(var i = 0;i<options1.length;i++){
+			//console.log(options1[i].nodeName);//测试，可以遍历出来
+			//console.log('标记：'+'${pu.formSrc}')//测试取出formSrc,注意是字符串形式
+			if(options1[i].value=='${pu.formSrc}'){
+				options1[i].selected="selected";//也可以赋值为true
+				//alert(options1[0].selected)//若显示，则弹出的是true
+			}
+		}
+		//设置-性质分类
+		var options2 = select[2].getElementsByTagName('option');
+		for(var i = 0;i<options2.length;i++){
+			//console.log(options1[i].nodeName);//测试，可以遍历出来
+			//console.log('标记：'+'${pu.formSrc}')//测试取出formSrc,注意是字符串形式
+			if(options2[i].value=='${pu.nature}'){
+				//alert(options2[i].selected)
+				options2[i].selected=true;
+			}
+		}
+		
+		//读取并设置复选框,复选框从后台传过来的是字符串，但是是数组形式，可以被识别为数组，并且直接遍历
+		for(var i =0;i<${pu.branch}.length;i++){
+			if(${pu.branch}[i]==0){
+				//如果后台传的是0，则是items[18]，即第19个		//上边已经声明了items，name选择器，所有复选框
+				items[18].checked=true;
+			}else{
+				//如果后台传的不是0，则是items[传的数-1]
+				items[${pu.branch}[i]-1].checked=true;//可以是checked也可以是true
+				//只要有不是0的，那‘无’肯定是不勾选的
+				items[18].checked=false;
+			}
+		}
+		
+		//ajax请求修改-jquery
+		$("#input-up").click(function(){
+			$.ajax({
+				"url":"/exercise/update",
+				"data":$("#update").serialize(),
+				"type":"POST",
+				"dataType":"json",
+				"success":function(json){
+					alert(json.message)
+				}
+			});
+		});
+
+		//删除事件
+		$("#delete").click(function(){
+			if(confirm("确定要删除吗？")){
+				window.location.href="pDelete?formCode=${pu.formCode}";
+			}
+		});
+
+	}
+</script>
+<style type="text/css">
+	#delete{
+		position:relative;
+		top:5px;
+		left:75%;
+	}
+	#back{
+		position:relative;
+		top:5px;
+		left:85%;
+	}
+	#input-up{
+		position:relative;
+		top:5px;
+	}
+</style>
+</head>
+<body>
+<!-- 来电信息表 -->
+<form id="update">
+
+<input id="back" type="button" value="返回简略表" class="layui-btn layui-btn-normal" >
+
+	<fieldset>
+	<legend>来电信息</legend>
+	<table border="1">
+		<tr>
+			<td class="ali">来电号码：</td>
+			<td><input id="one" type="text" readonly="readonly" name="phone" value="${pu.phone}"></td>
+			<td><input type="button" value="外呼建单"></td>
+			<td class="ali">归属地：</td>
+			<td><input type="text" name="phoneHome" value="${pu.phoneHome}"></td>
+			<td class="ali">来电时间：</td>
+			<td><input type="text" name="phoneTime"
+						readonly="readonly" value="${pu.phoneTime}"></td>
+		</tr>
+		<tr>
+			<td class="ali">姓名：</td>
+			<td><input type="text" name="username" value="${pu.username}"></td>
+			<td><!-- 占空 -->&lt╰（‵□′）╯</td>
+			<td class="ali">联系电话：</td>
+			<td><input id="two" type="text" name="phone2" value="${pu.phone2}"></td>
+			<td class="ali">是否保密：</td>
+			<td>
+				<select name="isSecrecy">
+		 			<option value="2" selected="selected">否</option>
+		 			<option value="1">是</option>
+ 				</select>
+ 			</td>
+		 	<td>
+		 		<input type="button" value="一键回访">
+		 		<input type="button" value="外呼">
+		 	</td>
+		</tr>
+		<tr>
+			<td class="ali">家庭住址：</td>
+			<td colspan="7">
+				<textarea rows="1" cols="100%" name="home" maxlength="50">${pu.home}</textarea>
+			</td>
+		</tr>
+	</table>
+	<br>
+	</fieldset>
+<p>
+<!-- 表单信息表 -->
+	<fieldset>
+	<legend>表单详情</legend>
+	<table border="1">
+		<tr>
+			<td class="ali">表单编码：</td>
+			<td><!-- 只读的 -->
+				<input type="text" readonly="readonly"
+				 name="formCode" value="${pu.formCode}">
+			</td>
+			<td class="ali">表单来源：</td>
+			<td>
+				<select name="formSrc">
+				<!-- 不写value属性，则value默认是标签内的值 -->
+				<!-- 遍历数据库绑定过来的数据 -->
+					<#list options as option>
+						<option>${option.formSrc}</option>
+					</#list>
+				</select>
+			</td>
+			<td class="ali">性质分类：</td>
+			<td>
+				<select name="nature">
+				<!-- 遍历数据库绑定过来的数据 -->
+					<#list options as option> 
+						<option>${option.nature}</option>
+					</#list>
+				</select>
+			</td>
+			<td class="ali">内容分类：</td>
+			<td><input type="text" name="content" value="${pu.content}"><input type="button" value="选择"></td>
+		</tr>
+		<tr>
+			<td class="ali">标题：</td>
+			<td colspan="3">
+				<input type="text" name="title" value="${pu.title}">
+			</td>
+			<td class="ali">事发区域：</td>
+			<td colspan="3"><input type="text" name="area" value="${pu.area}">
+			<input type="button" value="知识中心"></td>
+		</tr>
+		<tr>
+			<td class="ali">大事记：</td>
+			<td colspan="3">
+				<input type="text" name="event" value="${pu.event}">
+				<input type="button" value="选择">
+				<input type="button" value="清除">
+			</td>
+			<td class="ali">重复次数：</td>
+			<!-- 次数默认是0 -->
+			<td><input type="text" name="time" value="${pu.time}"></td>
+		</tr>
+		<tr>
+			<td class="ali">线路：</td>
+			<td colspan="7">
+				<!-- 遍历输出多选 -->
+				<#list 1..18 as i>
+					<input type="checkbox" name="branchPage" 
+						value="${i}" id="branch${i}">
+					<label for="branch${i}">${i}</label>
+				</#list>
+					<!-- 0是无线路 -->
+					<input type="checkbox" name="branchPage" 
+					value="0" id="branch0" checked="checked">
+					<label for="branch0">无</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="ali">详细内容：</td>
+			<td colspan="7"><textarea rows="3" cols="100%" name="detail">${pu.detail}</textarea></td>
+		</tr>
+		<tr>
+			<td class="ali">处理方式：</td>
+			<td>
+				<select name="mode">
+				<option value="1">当场回复</option>
+				<option value="2">转办其它单位</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="ali">答复信息：</td>
+			<td colspan="7"><textarea rows="3" cols="100%" name="answer">${pu.answer}</textarea></td>
+		</tr>
+	</table>
+	<div  class="alig">
+	<!-- 修改并保存要用ajax -->
+		<input id="input-up" type="button" value="修改并保存" class="layui-btn">
+		<input id="delete" type="button" class="layui-btn layui-btn-danger" value="删除">
+	</div>
+	</fieldset>
+</form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+                border: 1px solid red; 
+                -webkit-animation: myFirst 5s;
+			}
+			/*
+			   from   0
+			   to     100
+			 * */
+			@-webkit-keyframes myFirst{
+				from{background: yellow;}
+				to{background: green;}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="">
+			
+		</div>
+		<p>
+			CSS3 动画<br />
+当您在 @keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果。<br />
+
+通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：<br />
+
+规定动画的名称<br />
+规定动画的时长<br />
+		</p>
+	</body>
+</html>

@@ -1,0 +1,117 @@
+Java基础
+1.Java中内存管理及各区域内存储数据的生命周期?
+2.JVM堆内存的分代管理以及垃圾回收流程?
+3.面向对象三大特征及详细理解?
+4.重载与重写的区别?
+5.接口和抽象类区别?
+6.实例变量和静态变量的区别?
+7.八大基本类型及字节数和位数?
+8.switch cach是否支持byte,short和long,是否支持String?
+9.String中和Array中是否有length属性和length()方法?
+10.==和equals的区别?
+11.String str=new String("abc");创建了几个对象?
+   再以上基础上又String str1=new String("abc");一共创建几个对象?
+12.String,StringBuffer,StringBulider的区别?
+13.怎么把ISO8859-1编码的字符串转换成GBK或者UTF-8的字符串?
+14.Integer i1=127;Integer i2=127;i1==i2结果为true还是false?
+   Integer i3=Integer.valueOf(127);Integer i3=Integer.valueOf(127);
+   i3==i4结果为true还是false?
+15.List和Set以及Map他们的实现类有哪些?
+16.ArrayList和LinkedList的区别?
+17.HashMap和HashTable的区别?
+18.HashMap内部存储数据的原理?(PPT上有张原理图务必会画)
+19.创建线程有几种方式?有何区别?
+20.线程运行中的五种状态?
+21.线程中synchronized的用法?
+22.synchronized什么情况下是同步锁,什么情况下是互斥锁?
+23.什么是死锁?怎么解决死锁?
+24.Exception和RuntimeException区别?
+   throw和throws的区别?
+25.请说出五种以上常见运行时异常的名字以及产生的原因和解决方案?
+26.final,finalize,finally的区别?
+27.什么是反射,怎么通过反射获取类对象,并且实例化该类对象,怎么获取类对象中属性和方法并执行方法?
+CSS/JS
+28.表单控件有哪些?
+29.三种弹出框分别是?
+30.什么是盒子模型?盒子模型计算公式?
+31.JS冒泡机制?
+   什么是JS闭包?
+32.怎么获取select下来选选中的option的value值?
+33.怎么获取checkbox选中的多个value值?
+34.怎么获取radio单选框选中的value值?
+35.CSS选择器有哪些?
+36.JQuery选择器有哪些?
+37.JQuery中val(),val("值"),html(),html("值"),text(),text("值")有什么区别?分别支持哪些类型标签?
+38.JQuery中addClass("样式名");removeClass("样式名");hasClass("样式名");
+   data("绑定名");data("绑定名","绑定值");attr("属性名","属性值");attr("属性名");函数都是做什么用的?
+数据库/JDBC
+39.mysql和oracle的端口号?
+40.oracle和mysql中的聚合函数和空值函数有哪些?
+41.oracle和mysql中各自的分页查询怎么写?
+42.oracle和mysql中怎么做行列转换?
+43.复制表:包含结构和数据以及只包含结构不包含数据分别怎么实现?
+44.将一个表中的数据插入到另外一张表结构相同的表中怎么实现?
+45.oracle中的rowid和rownum分别是什么?
+46.数据库约束有哪些?
+47.怎么写存储过程和触发器?
+48.删除表中重复数据保留一条怎么实现?
+49.union和unionall的区别?
+50.创建用户并授权?
+51.真删除和假删除?真分页和假分页?
+52.什么是事务?事务有哪4项特性?
+53.事务隔离级别,脏读,幻读,不可重复读?
+54.数据库中乐观锁和悲观锁?
+55.JDBC的运行过程?
+56.Statement和Preparedstatement的区别?
+Servlet/JSP
+57.什么是HTTP协议?包含哪些数据包,各数据包内又有什么?
+58.有几种方式可以修改tomcat的端口号?
+59.servlet生命周期?
+60.JSP的运行过程?
+61.JSP九大内置对象?其中哪4个是作用域对象?怎么从某个作用域中取值?
+62.session和cookie的区别(详细的)?
+63.转发和重定向的区别以及是哪个对象调用其哪个方法执行的?
+64.get和post请求的区别?
+框架
+65.Spring框架的核心模块(PPT上有一张图)?
+66.SpringIOC和DI?
+67.SpringMVC的五大核心组件及工作流程?
+68.SpringMyBatis整合需要做哪些相关配置?
+69.单例模式,工厂模式?
+70.Ajax技术(js版和jquey版)?
+71.JSON技术?
+72.Spring框架的组件扫描注解有哪些?
+73.RequestMapping和ResponsBody注解分别是做什么用的?
+74.什么是AOP?通知方式有几种?切入点有哪些?
+75.拦截器和过滤器的区别?
+76.MyBatis中#{}和${}的区别?
+项目
+77.项目某模块思路
+   1)该模块是解决用户什么问题的?
+   2)牵涉到了那些数据库相关表,表里有哪些主要字段,多表的情况下表之间的关系?
+   3)项目中都用到了那些技术?每个技术都在请求流程中哪些环节生效?
+   4)从请求发起时以一个完整的流程把相关技术和业务穿插到该请求中?
+
+提高题:
+78.Nginx是什么技术?
+79.Redis是什么技术?
+80.BootStrap是什么框架?
+81.Linux系统命令知道哪些?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

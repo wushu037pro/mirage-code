@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>border-image</title>
+		<style type="text/css">
+			div{
+				border: 15px solid gray;
+				width: 300px;
+				padding: 10px 20px;
+				margin: 50px auto;
+			}
+			/*图片铺满整个边框*/
+			.round{
+				-webkit-border-image: url(border-image.png) 30 30 round;
+			}
+			/*图片被拉伸以填充该区域。 150 90*/
+			.stretch{
+				-webkit-border-image: url(border-image.png) 30 30 stretch;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="round">
+			 图片铺满整个边框
+		</div>
+		
+		<div class="stretch">
+			图片被拉伸以填充该区域。
+		</div>
+		
+	<div id="">
+		<p>这是我们使用的图片：</p>
+        <img src="./border-image.png">
+	   <p><b>注释：</b> Internet Explorer 不支持 border-image 属性。</p>
+	   <p>border-image 属性规定了用作边框的图片。</p>
+	</div>
+	
+	<!--
+	-webkit-border-image: url(border-image.png) 30 30 stretch;  缩写	
+值	                                       描述	
+border-image-source	用在边框的图片的路径。	
+border-image-slice	图片边框向内偏移。	
+border-image-width	图片边框的宽度。	
+border-image-outset	边框图像区域超出边框的量。	
+border-image-repeat	图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)。
+		
+	-->
+	</body>
+</html>

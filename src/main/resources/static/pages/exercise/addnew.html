@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新增页</title>
+<!-- 引入layui.css -->
+<link rel="stylesheet" href="${re.contextPath}/plugin/layui/css/layui.css" media="all">
+<!-- 引入layui.js -->
+<script src="${re.contextPath}/plugin/layui/layui.js"></script>
+
+<style type="text/css">
+	.ali{
+		text-align:right;
+	}
+	.alig{
+		margin-left: 0%;
+	}
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		//手机号码和联系电话同步显示
+		var one = document.getElementById("one");
+		var two = document.getElementById("two");
+		one.onkeyup=function(){
+			two.value=this.value;
+		}
+		//复选框的点击事件
+		var branch0 = document.getElementById("branch0");
+		var items = document.getElementsByName("branchPage");
+		branch0.onclick=function(){
+			//将所有线路取消选择
+			for(var i=0;i<items.length-1;i++){
+				items[i].checked = false;
+			}
+			//不能让一个都不选,只要点击即为勾选，不能取消勾选
+			branch0.checked = true;
+		}
+		for(var i=0;i<items.length-1;i++){
+			items[i].onclick = function(){
+				branch0.checked = false;
+			}
+		}
+		//取消按钮
+		var reinput = document.getElementById("re-input");
+		reinput.onclick=function(){
+			//返回简略表
+			window.location.href="showAll";
+		}
+		
+	}
+</script>
+<style type="text/css">
+	#re-input{
+		position:relative;
+		top:5px;
+		left:85%
+	}
+	#save-input{
+		position:relative;
+		top:5px;
+	}
+</style>
+</head>
+<body>
+<input id="re-input" type="button" value="返回简略表" class="layui-btn layui-btn-radius layui-btn-normal">
+<!-- 来电信息表 -->
+<form action="/exercise/addnew">
+	<fieldset>
+	<legend>来电信息</legend>
+	<table border="1">
+		<tr>
+			<td class="ali">来电号码：</td>
+			<td><input id="one" type="text" name="phone"></td>
+			<td><input type="button" value="外呼建单"></td>
+			<td class="ali">归属地：</td>
+			<td><input type="text" name="phoneHome"></td>
+			<td class="ali">来电时间：</td>
+			<td><input type="text" name="phoneTime"
+						readonly="readonly" value="${phoneTime}"></td>
+		</tr>
+		<tr>
+			<td class="ali">姓名：</td>
+			<td><input type="text" name="username"></td>
+			<td><!-- 占空 -->&lt╰（‵□′）╯</td>
+			<td class="ali">联系电话：</td>
+			<td><input id="two" type="text" name="phone2"></td>
+			<td class="ali">是否保密：</td>
+			<td>
+				<select name="isSecrecy">
+		 			<option value="2" selected="selected">否</option>
+		 			<option value="1">是</option>
+ 				</select>
+ 			</td>
+		 	<td>
+		 		<input type="button" value="一键回访">
+		 		<input type="button" value="外呼">
+		 	</td>
+		</tr>
+		<tr>
+			<td class="ali">家庭住址：</td>
+			<td colspan="7">
+				<textarea rows="1" cols="100%" name="home" maxlength="50">输入家庭住址...</textarea>
+			</td>
+		</tr>
+	</table>
+	<br>
+	</fieldset>
+<p>
+<!-- 表单信息表 -->
+	<fieldset>
+	<legend>表单详情</legend>
+	<table border="1">
+		<tr>
+			<td class="ali">表单编码：</td>
+			<td><!-- 只读的 -->
+				<input type="text" readonly="readonly"
+				 name="formCode" value="${formCode}">
+			</td>
+			<td class="ali">表单来源：</td>
+			<td>
+				<select name="formSrc">
+				<!-- 不写value属性，则value默认是标签内的值 -->
+				<!-- 遍历数据库绑定过来的数据 -->
+					<#list options as option>
+						<option>${option.formSrc}</option>
+					</#list>
+				</select>
+			</td>
+			<td class="ali">性质分类：</td>
+			<td>
+				<select name="nature">
+				<!-- 遍历数据库绑定过来的数据 -->
+					<#list options as option> 
+						<option>${option.nature}</option>
+					</#list>
+				</select>
+			</td>
+			<td class="ali">内容分类：</td>
+			<td><input type="text" name="content"><input type="button" value="选择"></td>
+		</tr>
+		<tr>
+			<td class="ali">标题：</td>
+			<td colspan="3">
+				<input type="text" name="title">
+			</td>
+			<td class="ali">事发区域：</td>
+			<td colspan="3"><input type="text" name="area"><input type="button" value="知识中心"></td>
+		</tr>
+		<tr>
+			<td class="ali">大事记：</td>
+			<td colspan="3">
+				<input type="text" name="event">
+				<input type="button" value="选择">
+				<input type="button" value="清除">
+			</td>
+			<td class="ali">重复次数：</td>
+			<!-- 次数默认是0 -->
+			<td><input type="text" name="time" value="0"></td>
+		</tr>
+		<tr>
+			<td class="ali">线路：</td>
+			<td colspan="7">
+				<!-- 遍历输出多选 -->
+				<#list 1..18 as i>
+					<input type="checkbox" name="branchPage" 
+						value="${i}" id="branch${i}">
+					<label for="branch${i}">${i}</label>
+				</#list>
+					<!-- 0是无线路 -->
+					<input type="checkbox" name="branchPage" 
+					value="0" id="branch0" checked="checked">
+					<label for="branch0">无</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="ali">详细内容：</td>
+			<td colspan="7"><textarea rows="3" cols="100%" name="detail">输入详细内容...</textarea></td>
+		</tr>
+		<tr>
+			<td class="ali">处理方式：</td>
+			<td>
+				<select name="mode">
+				<option value="1">当场回复</option>
+				<option value="2">转办其它单位</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="ali">答复信息：</td>
+			<td colspan="7"><textarea rows="3" cols="100%" name="answer">输入答复信息...</textarea></td>
+		</tr>
+	</table>
+	<div  class="alig">
+		<input id="save-input" type="submit" value="保存" class="layui-btn">
+	</div>
+	</fieldset>
+</form>
+
+</body>
+</html>

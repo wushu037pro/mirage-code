@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>过度</title>
+		<style type="text/css">
+			.animated_div
+			{
+			width:100px;
+			height:80px;
+			line-height: 80px;
+			text-align: center;
+			background:#92B901;
+			color:#ffffff;
+			position:absolute;
+			font-weight:bold;
+			margin:50px;
+			
+			-webkit-border-radius:5px;
+			transition-duration:5s;
+			opacity:0.4;
+			}
+			
+			.animated_div:hover
+			{
+				-webkit-transform: rotate(360deg);
+				opacity:1;
+				background:#1ec7e6;
+				width:200px;
+				height:100px;
+				font-size:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="animated_div">
+			悬浮我
+		</div>
+	</body>
+</html>

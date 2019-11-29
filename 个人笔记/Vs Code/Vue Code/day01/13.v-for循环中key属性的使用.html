@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-v2.6.10.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div>
+            <label>Id:
+                <input type="text" v-model="id">
+            </label>
+
+            <label>Name:
+                    <input type="text" v-model="name">
+            </label>
+
+            <input type="button" value="添加" @click="add">
+
+        </div>
+
+        <!-- 需要单独为每项提供一个唯一key属性，item是唯一的，但是item是对象，可以用item.id或item.name -->
+        <!-- 注意： v-for 循环的时候，key 属性只能使用 number 或 string -->
+        <!-- 注意：key 在使用的时候，必须使用 v-bind 属性绑定的形式，指定 key 的值 -->
+        <!-- 在组件中，使用v-for循环的时候，或者在一些特殊情况中，如果 v-for 有问题，必须 在
+            使用v-for 的同时，指定 唯一的 字符串/数字 类型 : key 值 -->
+        <p v-for="item in list" :key="item">
+            <input type="checkbox">{{item.id}} --- {{item.name}}
+        </p>
+    </div>
+
+    <script>
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: '',
+                name: '',
+                list:[
+                    { id: 1, name: '李斯' },
+                    { id: 2, name: '嬴政' },
+                    { id: 3, name: '赵高' },
+                    { id: 4, name: '韩非' },
+                    { id: 5, name: '荀子' },
+                ]
+            },
+            methods: {
+                add(){ // 添加方法
+                    // this.list.push({ id: this.id, name: this.name })
+                    //头部追加。此时选中(渲染) 5 ，然后添加一个，添加后勾选(渲染)的变成了 4 。
+                    //  这是因为vue默认只记住了勾选(渲染)的是第几个，而没记住到底勾选(渲染)的是谁
+                    this.list.unshift({ id: this.id, name: this.name })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

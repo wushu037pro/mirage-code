@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-v2.6.10.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <p>{{ list[0] }}</p>
+        <p>{{ list[1] }}</p>
+        <p>{{ list[2] }}</p>
+        <p>{{ list[3] }}</p>
+        <p>{{ list[4] }}</p>
+        <p>{{ list[5] }}</p> -->
+
+        <!-- <p v-for="item in list">{{ item }}</p> -->
+        <!-- 加上i，可以得到索引值。
+                注意：不是必须叫item和i，形式为(每一项的值,索引值)，只和前后顺序有关 -->
+        <p v-for="(item, i) in list">索引值：{{ i }}--- 每一项：{{ item }}</p>
+
+    </div>
+
+    <script>
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list:[1, 2, 3, 4, 5, 6]
+            },
+            methods: {
+                
+            }
+        });
+    </script>
+</body>
+
+</html>

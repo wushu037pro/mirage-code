@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS3 2D 翻转</title>
+		<style type="text/css">
+			div{
+				width: 150px;
+				height: 150px;
+				background-color: yellow;
+				border: 1px solid red;
+			}
+			/*
+			    skew(x-angle,y-angle)	定义沿着 X 和 Y 轴的 2D 倾斜转换。	
+				skewX(angle)	定义沿着 X 轴的 2D 倾斜转换。	
+				skewY(angle)	定义沿着 Y 轴的 2D 倾斜转换。	
+			 * */
+			.div2{
+				margin: 200px;
+				-webkit-transform: skew(20deg,15deg);
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			CSS3 转换<br/>
+			通过 CSS3 转换，我们能够对元素进行移动、缩放、转动、拉长或拉伸。<br/>
+			通过 skew() 方法，元素翻转给定的角度，根据给定的水平线（X 轴）和垂直线（Y 轴）参数：deg
+		</p>
+		<!--您将学到如下 2D 转换方法
+			translate()
+			rotate()
+			scale()
+			skew()
+			matrix()
+		-->
+		<div class="div1">
+			我们来学习翻转方法
+		</div>
+		<div class="div2">
+			我们来学习翻转方法
+		</div>
+	
+	</body>
+</html>
