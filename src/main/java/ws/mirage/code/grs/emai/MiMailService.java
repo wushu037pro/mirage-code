@@ -22,6 +22,7 @@ public class MiMailService {
     private static final String timeout = MiMailConfig.timeout;
     private static final String personal = MiMailConfig.personal;
     private static JavaMailSenderImpl mailSender = createMailSender();
+
     /**
      * 邮件发送器
      *
@@ -44,10 +45,10 @@ public class MiMailService {
     /**
      * 发送邮件
      *
-     * @param to 接受人
+     * @param to      接受人
      * @param subject 主题
-     * @param html 发送内容
-     * @throws MessagingException 异常
+     * @param html    发送内容
+     * @throws MessagingException           异常
      * @throws UnsupportedEncodingException 异常
      */
     public static void sendMail(String to, String subject, String html) throws MessagingException, UnsupportedEncodingException, javax.mail.MessagingException {
